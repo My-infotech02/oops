@@ -1,0 +1,137 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+struct node
+{
+    char data[10];
+    struct node *left,*right;
+};
+typedef struct node* NODE;
+class customer
+{
+    NODE first;
+    int count;
+    public:customer()
+           {
+             first=NULL;
+             count=1;
+           }
+           void create();
+           void del(int);
+           void print();
+           ~customer()
+           {
+             cout<<"destructing customer...\n";
+           }
+};
+void customer::create()
+{
+    char item[10];
+    cout<<"Enter the item";
+    cin>>item;
+    NODE temp;
+    temp=new(struct node);
+    temp->left=temp->right=NULL;
+    if(first==NULL)
+    {
+        strcpy(temp->data,item);
+        first=temp;
+    }
+    else
+    {
+        strcpy(temp->data,item);
+        temp->right=first;
+        first->left=temp;
+        first=temp;
+    }
+    
+}
+void customer::del(int pos)
+{
+    NODE prev,cur,temp;
+    cur=first;
+    if(first==NULL)
+    {
+        cout<<"List is empty\n";
+        return;
+    }
+    if(pos==1)
+    {
+        cout<<"The deleted item is:";
+        cout<<first->data<<endl;
+        first=first->right;
+        if(first!=NULL)
+        {
+            first->left=NULL;
+        }
+        delete(cur);
+        return;
+    }
+    prev=NULL;
+    cur=first;
+    while(cur!=NULL&&count!=pos)
+    {
+        prev=cur;
+        cur=cur->right;
+        count++;
+    }
+    if(cur==NULL)
+    {
+        cout<<"Wrong position entered\n";
+        return;
+    }
+    else
+    {
+        count=1;
+        temp=cur->right;
+        prev->right=temp;
+        if(temp!=NULL)
+        {
+            temp->left=prev;
+        }
+        cout<<"The deleted item is:";
+        cout<<cur->data<<endl;
+        delete(cur);
+    }
+    
+}
+void customer::print()
+{
+    NODE temp;
+    if(first==NULL)
+    {
+        cout<<"List is empty\n";
+        return;
+    }
+    temp=first;
+    cout<<"Contents of List are\n";
+    while(temp!=NULL)
+    {
+        cout<<"->"<<temp->data<<endl;
+        temp=temp->right;
+    }
+}
+int main()
+{
+    int pos,choice;
+    customer d;
+    while(1)
+    {
+        cout<<"1.Insert\t2.Delete\t3.Display\t4.Exit\n";
+        cout<<"Enter the choice\n";
+        cin>>choice;
+        switch(choice)
+        {
+            case 1:d.create();
+                   break;
+            case 2:cout<<"Enter position to delete item\n";
+                   cin>>pos;
+                   d.del(pos);
+                   break;
+            case 3:d.print();
+                   break;
+            default:return(0);
+        }
+    }
+    
+}

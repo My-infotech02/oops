@@ -1,0 +1,119 @@
+#include<iostream>
+using namespace std;
+const int size=10;
+template<class type>
+class queue
+{
+    type q[size];
+    int r,f;
+    public: queue()
+            {
+                r=-1;
+                f=0;
+            }
+            void insertr(type);
+            type deletef();
+            void display();
+};
+template<class type>
+void queue<type>::insertr(type item)
+{
+    if(r==size-1)
+    {
+        cout<<"Queue is full cannot insert\n";
+        return ;
+    }
+    r+=1;
+    q[r]=item;
+}
+template<class type>
+type queue<type>::deletef()
+{
+    type item;
+    if(f>r)
+     return -1;
+    item=q[f];
+    f+=1;
+    return item;
+}
+template<class type>
+void queue<type>::display()
+{
+    if(f>r)
+    {
+        cout<<"Queue is empty\n";
+        return ;
+    }
+    cout<<"contents of queue are\n";
+    for(int i=f;i<=r;i++)
+      cout<<q[i]<<endl;
+}
+int main()
+{
+    int choice;
+    cout<<"1.Integer Queue\t 2.Double Queue\n";
+    cout<<"Enter your choice\n";
+    cin>>choice;
+    if(choice==1)
+    {
+        queue<int> q;
+        for(;;)
+        {
+            int ch;
+            cout<<"1.Insert\t 2.Delete\t 3.Display\t 4.Exit\n";
+            cout<<"Enter your choice";
+            cin>>ch;
+            switch(ch)
+            {
+                case 1:int item;
+                       cout<<"Enter the item\n";
+                       cin>>item;
+                       q.insertr(item);
+                       break;
+                case 2:int y;
+                       y=q.deletef();
+                       if(y==-1)
+                            cout<<"Queue is empty\n";
+                       else
+                        cout<<"Deleted item is:"<<y;
+                       break;
+                case 3:q.display();
+                       break;
+                default:return(0);
+            }
+        }
+    }
+    else if(choice==2)
+    { 
+        queue<double> q;
+        for(;;)
+        {
+            int ch;
+            cout<<"1.Insert\t 2.Delete\t 3.Display\t 4.Exit\n";
+            cout<<"Enter your choice";
+            cin>>ch;
+            switch(ch)
+            {
+                case 1:double item;
+                       cout<<"Enter the item\n";
+                       cin>>item;
+                       q.insertr(item);
+                       break;
+                case 2:double x;
+                       x=q.deletef();
+                       if(x==-1)
+                            cout<<"Queue is empty\n";
+                       else
+                        cout<<"Deleted item is:"<<x;
+                       break;
+                case 3:q.display();
+                       break;
+                default:return(0);
+            }
+        }
+    }
+    else
+        cout<<"Entered invalid choice\n";
+    return 0;
+    
+}

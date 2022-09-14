@@ -1,0 +1,54 @@
+#include<iostream>
+using namespace std;
+class complex
+{
+  float x;
+  float y;
+  public:
+    complex(){}
+    complex(float a,float b)
+    {
+      x=a;
+      y=b;
+    }
+    complex add(int);
+    complex add(complex);
+    void display();
+};
+complex complex::add(int a)
+{
+  complex c2;
+  c2.x=x+a;
+  c2.y=y;
+  return c2;
+}
+complex complex::add(complex c)
+{
+  complex c3;
+  c3.x=x+c.x;
+  c3.y=y+c.y;
+  return c3;
+}
+void complex::display()
+{
+  cout<<x<<"+"<<y<<"i"<<endl;
+}
+int main()
+{
+   complex c1(3,4);
+   int a;
+   cout<<"c1=";
+   c1.display();
+   complex c2,c3;
+   cout<<"Enter the integer value to add:\n";
+   cin>>a;
+   c2=c1.add(a);
+   c3=c1.add(c2);
+   cout<<"c1=";
+   c1.display();
+   cout<<"c2=";
+   c2.display();
+   cout<<"c3=";
+   c3.display();
+   return 0;
+}

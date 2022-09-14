@@ -1,0 +1,152 @@
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+class date1
+{
+    
+    public:int d,m,y;
+           int leap(int);
+           int days(int);
+           date1 operator+(int);
+           int operator-(date1);
+           friend ostream & operator<<(ostream &,date1);
+           friend int checkdate(date1,date1);
+           void getdate(void);
+};
+ostream & operator<<(ostream &out,date1 d)
+{
+    out<<d.d<<"/"<<d.m<<"/"<<d.y;
+    return (out);
+}
+int date1::leap(int y)
+{
+    if(y%4==0)
+     return 1;
+    else
+     return 0;
+}
+int date1::days(int i)
+{
+   
+    if(i==2)
+     return 28;
+    if(i==1||i==5||i==7||i==8||i==10||i==12)
+     return 31;
+    return 30;
+}
+int checkdate(date1 d1,date1 d2)
+{
+    if(d1.y<d2.y)
+     return 0;
+    else if(d1.y==d2.y)
+    {
+        if(d1.m<d2.m)
+         return 0;
+        else if(d1.m==d2.m)
+        {
+            if(d1.d<d2.d)
+             return 0;
+            else
+             return 1;
+        }
+        else 
+         return 1;
+    }
+    else 
+     return 1;
+}
+int date1::operator-(date1 d2)
+{
+    int leapyear,count=0;
+    while(m!=d2.m||y!=d2.y)
+    {
+        d2.d++;
+        count++;
+        leapyear=0;
+        if(d2.m==2)
+         leapyear=d2.leap(d2.y);
+        if(d2.d>(days(d2.m)+leapyear))
+        {
+            d2.d=1;
+            d2.m++;
+        }
+        if(d2.m>12)
+        {
+            d2.m=1;
+            d2.y++;
+        }
+    }
+    count+=(d-d2.d);
+    return (count);
+}
+date1 date1::operator+(int ndays)
+{
+    int leapyear=0,i;
+    for(i=1;i<=ndays;i++)
+    {
+        d++;
+        if(m==2)
+         leapyear=leap(y);
+        if(d>(days(m)+leapyear))
+        {
+            d=1;
+            m++;
+        }
+        if(m>12)
+        {
+            m=1;
+            y++;
+        }
+    }
+    return *this;
+}
+void date1::getdate(void)
+{
+    cout<<"Enter the days:\n";
+    cin>>d;
+    cout<<"Enter the month:\n";
+    cin>>m;
+    cout<<"Enter the year:\n";
+    cin>>y;
+}
+int main()
+{
+    date1 d1,d2,d3,d4;
+    int choice,no_days=0,i;
+    for(;;)
+    {
+        cout<<"\n1.Subtract 2 dates\t2.Add no of days\t3.Exit\n";
+        cin>>choice;
+        switch(choice)
+        {
+            case 1:cout<<"Enter date 1 greater than date 2\n";
+                   d1.getdate();
+                   d2.getdate();
+                   i=checkdate(d1,d2);
+                   if(i==1)
+                   {
+                       no_days=d1-d2;
+                       cout<<d1<<"-"<<d2<<endl;
+                   }
+                   else
+                   {
+                       no_days=d2-d1;
+                       cout<<d2<<"-"<<d1<<endl;
+                   }
+                   cout<<no_days;
+                   break;
+            case 2:cout<<"Enter no of days\n";
+                   cin>>no_days;
+                   d3.getdate();
+                   cout<<d3<<"+"<<no_days<<endl;
+                   d4=d3+no_days;
+                   cout<<d4<<endl;
+                   break;
+            default:cout<<"THANKS :)\n";
+                    exit(0);
+        }
+    }
+}
+
+        
+    

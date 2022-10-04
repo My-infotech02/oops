@@ -1,0 +1,38 @@
+#include<iostream>
+using namespace std;
+class B;
+class A
+{
+    int x;
+    public:
+            friend float mean(A &,B &);
+            void set()
+            {
+                cout<<"Enter the value of x\n";
+                cin>>x;
+            }
+};
+class B
+{
+    int y;
+    public:
+            friend float mean(A &,B &);
+            void set()
+            {
+                cout<<"Enter the value of y\n";
+                cin>>y;
+            }
+};
+float mean(A &a,B &b)
+{
+    return(float)((a.x+b.y)/2.0);
+}
+int main()
+{
+    A a;
+    B b;
+    a.set();
+    b.set();
+    cout<<"mean of two numbers is:"<<mean(a,b);
+    return 0;
+}

@@ -1,0 +1,37 @@
+#include<iostream>
+using namespace std;
+class time1
+{
+    int hours;
+    int mins;
+    public:
+            void settime(int h,int m)
+            {
+                hours=h;
+                mins=m;
+            }
+            void gettime()
+            {
+                cout<<hours<<"Hours and";
+                cout<<mins<<"Minutes\n";
+            }
+            void sum(time1,time1);
+};
+void time1::sum(time1 t1,time1 t2)
+{
+    mins=t1.mins+t2.mins;
+    hours=mins/60;
+    mins=mins%60;
+    hours=hours+t1.hours+t2.hours;
+}
+int main()
+{
+    time1 t1,t2,t3;
+    t1.settime(2,45);
+    t2.settime(3,55);
+    t3.sum(t1,t2);
+    cout<<"\nTime 1:";t1.gettime();
+    cout<<"\nTime 2:";t2.gettime();
+    cout<<"\nTime 3:";t3.gettime();
+    return 0;
+}

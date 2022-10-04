@@ -1,0 +1,52 @@
+#include<iostream>
+using namespace std;
+class student
+{
+    static int rno;
+    char name[25];
+    float t1,t2,t3,avg;
+    public:
+            void read();
+            void compute();
+            void display();
+};
+int student::rno;
+void student::read()
+{
+    rno=++rno;
+    cout<<"\nEnter the name of student:";
+    cin>>name;
+    cout<<"\nEnter the three test marks:";
+    cin>>t1>>t2>>t3;
+}
+void student::compute()
+{
+    avg=0;
+    if(t1>=t2&&t3>=t2)
+     avg=(t1+t3)/2;
+    else if(t2>=t1&&t3>=t1)
+     avg=(t2+t3)/2;
+    else
+     avg=(t1+t2)/2;
+}
+void student::display()
+{
+    cout<<"\nRoll Number:"<<rno;
+    cout<<"\nName:"<<name;
+    cout<<"\nTest Marks:"<<t1"\t"<<t2"\t"<<t3;
+    cout<<"\nAverage Marks:"<<avg;
+}
+int main()
+{
+    student s[10];
+    int n,i;
+    cout<<"Enter the number of students\n";
+    cin>>n;
+    for(i=0;i<n;i++)
+    {
+        s[i].read();
+        s[i].compute();
+        s[i].display();
+    }
+    return 0;
+}

@@ -1,0 +1,64 @@
+#include<iostream>
+using namespace std;
+class elec
+{
+    int units;
+    char user[25];
+    float surcharge,bill;
+    public:
+            void read();
+            void calc();
+            void display();
+};
+void elec::read()
+{
+    cout<<"\nEnter the name of user:";
+    cin>>user;
+    cout<<"\nEnter the units consumed:";
+    cin>>units;
+}
+void elec::calc()
+{
+    surcharge,bill=0;
+    if(units>=0&&units<=100)
+     bill=50+units*1.5;
+    else if(units>=101&&units<=200)
+    {
+        bill=50+150+(units-100)*1.8;
+        if(bill>300)
+        {
+            surcharge=0.15*bill;
+            bill=bill+surcharge;
+        }
+    }
+    else
+    {
+        bill=50+150+180+(units-200)*2.5;
+        if(bill>300)
+        {
+            surcharge=0.15*bill;
+            bill=bill+surcharge;
+        } 
+    }
+}
+void elec::display()
+{
+    cout<<"\nUser Name:"<<user;
+    cout<<"\nUnits consumed:"<<units;
+    cout<<"\nBill Amount:"<<bill;
+    
+}
+int main()
+{
+    elec bill[10];
+    int n,i;
+    cout<<"Enter the number of users\n";
+    cin>>n;
+    for(i=0;i<n;i++)
+    {
+        bill[i].read();
+        bill[i].calc();
+        bill[i].display();
+    }
+    return 0;
+}

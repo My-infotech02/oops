@@ -1,0 +1,72 @@
+#include<iostream>
+using namespace std;
+class product
+{
+    char model[10];
+    int mfg_year;
+    int no_warranty;
+    public:
+            void showproduct()
+            {
+                cout<<"\nModel:"<<model;
+                cout<<"\nManufacturing year:"<<mfg_year;
+                cout<<"\nNumber of warranty years:"<<no_warranty;
+            }
+            void getproduct()
+            {
+                cout<<"\nEnter the model name of the product";
+                cin>>model;
+                cout<<"\nEnter the Manufacturing year of the product";
+                cin>>mfg_year;
+                cout<<"\nEnter the number of warranty years";
+                cin>>no_warranty;
+            }
+            
+};
+class manufacture
+{
+    char brand[20];
+    char country[20];
+    public:
+            void showmfg()
+            {
+                cout<<"\nBrand :"<<brand;
+                cout<<"\nCountry :"<<country;
+            }
+            void getmfg()
+            {
+                cout<<"\nEnter the brand";
+                cin>>brand;
+                cout<<"\nEnter the country name";
+                cin>>country;
+            }
+};
+class LCD_TV:public product,manufacture
+{
+    int inches;
+    int price;
+    public:
+            void showdata()
+            {
+                showmfg();
+                showproduct();
+                cout<<"\nInches:"<<inches;
+                cout<<"\nPrice :"<<price;
+            }
+            void getdata()
+            {
+                getmfg();
+                getproduct();
+                cout<<"\nEnter the size of TV";
+                cin>>inches;
+                cout<<"\nEnter the price of tv";
+                cin>>price;
+            }
+};
+int main()
+{
+    LCD_TV tv;
+    tv.getdata();
+    tv.showdata();
+    return 0;
+}

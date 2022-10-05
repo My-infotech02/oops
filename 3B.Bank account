@@ -1,0 +1,67 @@
+#include<string.h>
+#include<iostream>
+using namespace std;
+class account
+{
+    int acc_no;
+    char name[25];
+    float balance;
+    public:
+            account()
+            {
+                acc_no=-1;
+                balance=0.0;
+                strcpy(name,"\0");
+            }
+            void getdata()
+            {
+                cout<<"Enter the account number\n";
+                cin>>acc_no;
+                cout<<"Enter the name of the account holder\n";
+                cin.ignore();
+                cin.getline(name,25);
+                cout<<"Enter the initial balance\n";
+                cin>>balance;
+            }
+            void withdrawal()
+            {
+                int amt;
+                cout<<"Enter the amount to withdraw\n";
+                cin>>amt;
+                if((balance-amt)<500)
+                {
+                    cout<<"You dont have minimum balance in your account for transaction to take place\n";
+                }
+                else 
+                    balance=balance-amt;
+            }
+            void deposit()
+            {
+                int amt;
+                cout<<"Enter the amount to deposit\n";
+                cin>>amt;
+                balance=balance+amt;
+            }
+            void display()
+            {
+                cout<<"\nAccount Number:"<<acc_no;
+                cout<<"\nAccount Name:"<<name;
+                cout<<"\nAccount Balance:"<<balance;
+            }
+};
+int main()
+{
+    account acc;
+    acc.getdata();
+    acc.display();
+    char choice;
+    cout<<"Do you want to withdraw or Deposit(w/d)\t";
+    cin>>choice;
+    if(choice=='w')
+     acc.withdrawal();
+    else
+     acc.deposit();
+    acc.display();
+    return 0;
+}
+
